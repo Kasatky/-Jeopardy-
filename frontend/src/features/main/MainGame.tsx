@@ -1,51 +1,71 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import { Box } from "@mui/system";
-import styled from "@emotion/styled";
-import QuestionItem from "../questionItem/QuestionItem";
+import React from 'react';
+import {
+  Grid,
+  Container,
+  TableBody,
+  TableContainer,
+  Paper,
+  Table,
+  TableRow,
+  TableCell,
+  Box,
+} from '@mui/material';
+import QuestionItem from '../questionItem/QuestionItem';
+
+const scores = [100, 200, 300, 400, 500];
+
+const themes = ['Theme 1', 'Theme 2', 'Theme 3', 'Theme4', 'Theme5'];
 
 function MainGame(): JSX.Element {
-  const Item = styled(Paper)();
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container>
-        <Grid item xs={4}>
-          <Item>Тема1</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item xs={4}>
-            {cards.map((card): JSX.Element => (
-                <QuestionItem key={card.id} card={card}/>
-            ))}
-          <Item>Тема2</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item xs={4}>
-          <Item>Тема3</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-        <Grid item xs={4}>
-          <Item>xs=4</Item>
-        </Grid>
-      </Grid>
-    </Box>
+    <div>
+      <Container sx={{ marginTop: '30px' }}>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableBody>
+              {themes.map((theme) => (
+                <TableRow
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    sx={{ padding: 0, margin: 0 }}
+                  >
+                    <Box
+                      sx={{
+                        borderRight: '1px solid #ced5dd',
+                        height: 100,
+                        backgroundColor: 'primary.dark',
+                      }}
+                    >
+                      {theme}
+                    </Box>
+                  </TableCell>
+                  {scores.map((score) => (
+                    <TableCell align="right" sx={{ padding: 0, margin: 0 }}>
+                      <Box
+                        sx={{
+                          borderRight: '1px solid #ced5dd',
+                          height: 100,
+                          backgroundColor: 'primary.dark',
+                          '&:hover': {
+                            backgroundColor: 'primary.main',
+                            opacity: 0.9,
+                          },
+                        }}
+                      >
+                        {score}
+                      </Box>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </div>
   );
 }
 
