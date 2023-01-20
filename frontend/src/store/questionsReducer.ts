@@ -3,6 +3,7 @@ export type QuestionItem = {
     question: string;
     answer: string;
     value: number;
+    themeId: number;
 }
 
 export type QuestionsState = {
@@ -16,7 +17,7 @@ const initialState: QuestionsState = {
     error: null,
 }
 
-export type QuestionsAction = {type: 'Get_Questions', payload: QuestionItem[]}
+export type QuestionsAction = { type: 'Get_Questions', payload: QuestionItem[] }
 
 
 const questionReducer = (state: QuestionsState = initialState, action: QuestionsAction): QuestionsState => {
@@ -30,7 +31,7 @@ const questionReducer = (state: QuestionsState = initialState, action: Questions
 
         default: {
             return state;
-        } 
+        }
     }
 }
 

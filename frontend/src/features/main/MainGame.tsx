@@ -115,7 +115,7 @@ const questions1: Item[] = [
 const themes = [
   { id: 1, title: 'Россия' },
   { id: 2, title: 'Странное' },
-  { id: 3, title: 'Англо-русский словарь'},
+  { id: 3, title: 'Англо-русский словарь' },
 ];
 
 
@@ -124,7 +124,12 @@ const themes = [
 function MainGame(): JSX.Element {
 
   const questions = useSelector((state: RootState) => state.questions.list);
-  console.log(questions);
+
+  const russiaQuestions = questions.filter(q => q.themeId === 1);
+  console.log(russiaQuestions)
+  const weirdQuestions = questions.filter(q => q.themeId === 2);
+  const englishQuestions = questions.filter(q => q.themeId === 3);
+
 
   return (
     <Container sx={{ marginTop: '50px' }}>
@@ -156,8 +161,14 @@ function MainGame(): JSX.Element {
                     {theme.title}
                   </Box>
                 </TableCell>
-                {questions.map((item) => (
-                  <QuestionItem item={item} />
+                {russiaQuestions.map((item) => (
+                  <QuestionItem key={item.id} item={item} />
+                ))}
+                {weirdQuestions.map((item) => (
+                  <QuestionItem key={item.id} item={item} />
+                ))}
+                {englishQuestions.map((item) => (
+                  <QuestionItem key={item.id} item={item} />
                 ))}
               </TableRow>
             ))}
