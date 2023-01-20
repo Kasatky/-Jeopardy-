@@ -5,7 +5,7 @@ const questionRouter = require('./questionRoutes');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-app.use('/api/questions', questionRouter)
+app.use('/api/questions', questionRouter);
 app
   .listen(PORT)
   .on('error', (error) => console.log(`ERROR: ${error.message}`))
