@@ -7,7 +7,14 @@ function Auth(): JSX.Element {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
 
-  const auth = (): void => {};
+  const auth = async (): Promise<any> => {
+    const data = JSON.stringify({
+      username: userLogin,
+      email: userEmail,
+      password: userPassword,
+    });
+    await fetch('/auth/login', { method: 'POST', body: data });
+  };
 
   const handleLoginChange = (
     event: React.ChangeEvent<HTMLInputElement>,
