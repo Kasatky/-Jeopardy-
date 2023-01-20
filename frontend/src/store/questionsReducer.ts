@@ -1,4 +1,5 @@
 export type QuestionItem = {
+
   id: number;
   question: string;
   answer: string;
@@ -56,6 +57,7 @@ const questionReducer = (
 
     default: {
       return state;
+
     }
   }
 };

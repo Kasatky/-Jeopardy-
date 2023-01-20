@@ -7,7 +7,7 @@ import {
   Button,
   TextField,
 } from '@mui/material';
-import { Item } from '../main/MainGame';
+import { QuestionItem as Item } from '../../store/questionsReducer';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -39,8 +39,8 @@ function QuestionItem({ item }: QuestionItemProps): JSX.Element {
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
 
-  const sendAnswer = (): void => {
-    if (userAnswer.toLowerCase() === answer.toLowerCase()) {
+  const sendAnswer = (q: Item): void => {
+    if (userAnswer.toLowerCase() === q.answer.toLowerCase()) {
       setIsAnswerRight(true);
       setScore((prevValue) => prevValue + item.value);
     } else {
@@ -106,7 +106,7 @@ function QuestionItem({ item }: QuestionItemProps): JSX.Element {
             sx={{ width: '100%', margin: '20px 0' }}
           />
           <br />
-          <Button onClick={sendAnswer} variant="contained">
+          <Button onClick={(): void => sendAnswer(item)} variant="contained">
             Ответить
           </Button>
           {isAnswerRight === undefined ? (
@@ -114,7 +114,7 @@ function QuestionItem({ item }: QuestionItemProps): JSX.Element {
           ) : (
             <div style={{ fontSize: '22px' }}>
               {!isAnswerRight ? (
-                <p>Неверно! Правильный ответ: {answer}</p>
+                <p>Неверно! Правильный ответ: {item.answer}</p>
               ) : (
                 <p>Верно!</p>
               )}

@@ -112,6 +112,7 @@ export type Item = {
 //   },
 // ];
 
+
 // const themes = [
 //   { id: 1, title: 'Россия' },
 //   { id: 2, title: 'Странное' },
@@ -128,6 +129,7 @@ function MainGame(): JSX.Element {
   //   return allThemes;
   // })();
 
+
   useEffect(() => {
     async function getThemes(): Promise<any> {
       const response = await fetch('/api/questions');
@@ -138,6 +140,7 @@ function MainGame(): JSX.Element {
     getThemes();
   }, []);
   console.log(themes);
+
 
   return (
     <Container sx={{ marginTop: '50px' }}>
@@ -169,6 +172,7 @@ function MainGame(): JSX.Element {
                     {theme.title}
                   </Box>
                 </TableCell>
+
                 {theme.questions.map((item) => (
                   <QuestionItem item={item} />
                 ))}
