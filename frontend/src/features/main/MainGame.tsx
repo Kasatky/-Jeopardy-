@@ -41,6 +41,30 @@ export type Item = {
 //     value: 500,
 //   },
 // ];
+const questions1: Item[] = [
+  {
+    question: 'Question 1-1',
+    value: 100,
+  },
+  {
+    question:
+      'Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2',
+    value: 200,
+  },
+  {
+    question: 'Question 1-3',
+    value: 300,
+  },
+  {
+    question: 'Question 1-4',
+    value: 400,
+  },
+  {
+    question: 'Question 1-5',
+    value: 500,
+  },
+];
+
 
 // const questions2: Item[] = [
 //   {
@@ -109,6 +133,7 @@ function MainGame(): JSX.Element {
           <TableBody>
             {themes.map((theme) => (
               <TableRow
+                key={theme.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell
