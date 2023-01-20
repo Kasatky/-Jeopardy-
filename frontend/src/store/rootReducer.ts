@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import questionReducer from './questionsReducer';
+import questionReducer, { QuestionsState } from './questionsReducer';
 
 export type RootState = {
   // users: UserState
+  questions: QuestionsState, 
 };
 
 const rootReducer = combineReducers<RootState>({
