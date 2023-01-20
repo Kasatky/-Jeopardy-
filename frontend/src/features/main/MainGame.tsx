@@ -23,7 +23,8 @@ const questions1: Item[] = [
     value: 100,
   },
   {
-    question: 'Question 1-2',
+    question:
+      'Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2Question 1-2',
     value: 200,
   },
   {
@@ -100,6 +101,7 @@ function MainGame(): JSX.Element {
           <TableBody>
             {themes.map((theme) => (
               <TableRow
+                key={theme.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell
