@@ -12,7 +12,12 @@ import {
 } from '@mui/material';
 import QuestionItem from '../questionItem/QuestionItem';
 
-const questions = [
+export type Item = {
+  question: string;
+  value: number;
+};
+
+const questions: Item[] = [
   {
     question: 'Question 1',
     value: 100,
@@ -38,10 +43,6 @@ const questions = [
 const themes = ['Theme 1', 'Theme 2', 'Theme 3'];
 
 function MainGame(): JSX.Element {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = (): void => setOpen(true);
-  const handleClose = (): void => setOpen(false);
-
   return (
     <Container sx={{ marginTop: '30px' }}>
       <TableContainer component={Paper}>
@@ -72,59 +73,54 @@ function MainGame(): JSX.Element {
                   </Box>
                 </TableCell>
                 {questions.map((item) => (
-                  <TableCell align="right" sx={{ padding: 0, margin: 0 }}>
-                    <Box
-                      sx={{
-                        borderRight: '1px solid #ced5dd',
-                        height: 100,
-                        backgroundColor: 'primary.dark',
-                        '&:hover': {
-                          backgroundColor: 'primary.main',
-                          opacity: 0.9,
-                        },
-                      }}
-                    >
-                      <Button
-                        onClick={handleOpen}
-                        sx={{
-                          color: '#000',
-                          display: 'flex',
-                          width: '100%',
-                          height: '100%',
-                          fontSize: '30px',
-                        }}
-                      >
-                        {item.value}
-                      </Button>
-                    </Box>
+                  // <TableCell align="right" sx={{ padding: 0, margin: 0 }}>
+                  //   <Box
+                  //     sx={{
+                  //       borderRight: '1px solid #ced5dd',
+                  //       height: 100,
+                  //       backgroundColor: 'primary.dark',
+                  //       '&:hover': {
+                  //         backgroundColor: 'primary.main',
+                  //         opacity: 0.9,
+                  //       },
+                  //     }}
+                  //   >
+                  //     <Button
+                  //       onClick={handleOpen}
+                  //       sx={{
+                  //         color: '#000',
+                  //         display: 'flex',
+                  //         width: '100%',
+                  //         height: '100%',
+                  //         fontSize: '30px',
+                  //       }}
+                  //     >
+                  //       {item.value}
+                  //     </Button>
+                  //   </Box>
 
-                    <QuestionItem
-                      open={open}
-                      question={item.question}
-                      value={item.value}
-                      handleClose={handleClose}
-                    />
+                  <QuestionItem item={item} />
 
-                    {/* <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box sx={style}>
-                        <Typography
-                          id="modal-modal-title"
-                          variant="h6"
-                          component="h2"
-                        >
-                          {item.value}
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                          {item.question}
-                        </Typography>
-                      </Box>
-                    </Modal> */}
-                  </TableCell>
+                  //   {/* <Modal
+                  //     open={open}
+                  //     onClose={handleClose}
+                  //     aria-labelledby="modal-modal-title"
+                  //     aria-describedby="modal-modal-description"
+                  //   >
+                  //     <Box sx={style}>
+                  //       <Typography
+                  //         id="modal-modal-title"
+                  //         variant="h6"
+                  //         component="h2"
+                  //       >
+                  //         {item.value}
+                  //       </Typography>
+                  //       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  //         {item.question}
+                  //       </Typography>
+                  //     </Box>
+                  //   </Modal> */}
+                  // </TableCell>
                 ))}
               </TableRow>
             ))}

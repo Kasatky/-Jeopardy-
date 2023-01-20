@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Modal, Typography, TableCell, Button } from '@mui/material';
+import { Item } from '../main/MainGame';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -14,34 +15,57 @@ const style = {
 };
 
 type QuestionItemProps = {
-  open: boolean;
-  question: string;
-  value: number;
-  handleClose: () => void;
+  item: Item;
 };
 
-function QuestionItem({
-  open,
-  question,
-  value,
-  handleClose,
-}: QuestionItemProps): JSX.Element {
+function QuestionItem({ item }: QuestionItemProps): JSX.Element {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
+
   return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          {value}
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {question}
-        </Typography>
+    <TableCell align="right" sx={{ padding: 0, margin: 0 }}>
+      <Box
+        sx={{
+          borderRight: '1px solid #ced5dd',
+          height: 100,
+          backgroundColor: 'primary.dark',
+          '&:hover': {
+            backgroundColor: 'primary.main',
+            opacity: 0.9,
+          },
+        }}
+      >
+        <Button
+          onClick={handleOpen}
+          sx={{
+            color: '#000',
+            display: 'flex',
+            width: '100%',
+            height: '100%',
+            fontSize: '30px',
+          }}
+        >
+          {item.value}
+        </Button>
       </Box>
-    </Modal>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {item.value}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {item.question}
+          </Typography>
+        </Box>
+      </Modal>
+    </TableCell>
   );
 }
 
