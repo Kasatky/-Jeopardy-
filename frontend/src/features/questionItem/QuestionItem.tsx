@@ -28,7 +28,7 @@ function QuestionItem({ item }: QuestionItemProps): JSX.Element {
       <Box
         sx={{
           borderRight: '1px solid #ced5dd',
-          height: 100,
+          height: 150,
           backgroundColor: 'primary.dark',
           '&:hover': {
             backgroundColor: 'primary.main',
