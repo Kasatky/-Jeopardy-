@@ -1,15 +1,15 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Question extends Model {
-    static associate({ Theme }) {
-      Question.Theme = Question.belongsTo(Theme, {
+  class Theme extends Model {
+    static associate({ Question }) {
+      Theme.Questions = Theme.hasMany(Question, {
         foreignKey: 'themeId',
-        as: 'theme',
+        as: 'questions',
       });
     }
   }
-  Question.init(
+  Theme.init(
     {
       question: DataTypes.TEXT,
       answer: DataTypes.TEXT,
@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Question',
-      tableName: 'Questions',
+      modelName: 'Theme',
+      tableName: 'Themes',
     },
   );
-  return Question;
+  return Theme;
 };
