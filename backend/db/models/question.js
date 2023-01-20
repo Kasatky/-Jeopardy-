@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+  
   Question.init(
     {
       question: DataTypes.TEXT,
