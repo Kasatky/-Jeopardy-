@@ -1,38 +1,65 @@
 export type QuestionItem = {
-    id: number;
-    question: string;
-    answer: string;
-    value: number;
-    themeId: number;
-}
+
+  id: number;
+  question: string;
+  answer: string;
+  value: number;
+};
 
 export type QuestionsState = {
-    list: QuestionItem[],
-    error: Error | null,
-}
+  list: QuestionItem[];
+  error: Error | null;
+};
 
+export type ThemeItem = {
+  id: number;
+  title: string;
+  questions: QuestionItem[];
+};
 
-const initialState: QuestionsState = {
-    list: [],
-    error: null,
-}
+export type ThemeState = {
+  list: ThemeItem[];
+  error: Error | null;
+};
 
-export type QuestionsAction = { type: 'Get_Questions', payload: QuestionItem[] }
+// const initialState: QuestionsState = {
+//     list: [],
+//     error: null,
+// }
+const allThemes = (async (): Promise<any> => {
+  const response = await fetch('/api/questions');
+  const allThemes: ThemeItem[] = await response.json();
+  return allThemes;
+})();
 
+const initialThemeState: ThemeState = {
+  list: [],
+  error: null,
+};
 
-const questionReducer = (state: QuestionsState = initialState, action: QuestionsAction): QuestionsState => {
-    switch (action.type) {
-        case 'Get_Questions': {
-            return {
-                ...state,
-                list: action.payload
-            }
-        }
+export type QuestionsAction = {
+  type: 'Get_Questions';
+  payload: QuestionItem[];
+};
+export type ThemeAction = { type: 'Get_Themes'; payload: ThemeItem[] };
 
-        default: {
-            return state;
-        }
+const questionReducer = (
+  state: ThemeState = initialThemeState,
+  action: ThemeAction,
+): ThemeState => {
+  switch (action.type) {
+    case 'Get_Themes': {
+      return {
+        ...state,
+        list: action.payload,
+      };
     }
-}
+
+    default: {
+      return state;
+
+    }
+  }
+};
 
 export default questionReducer;
