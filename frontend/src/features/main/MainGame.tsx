@@ -128,11 +128,14 @@ function MainGame(): JSX.Element {
   //   return allThemes;
   // })();
 
-  useEffect(async (): Promise<void> => {
-    const response = await fetch('/api/questions');
-    const allThemes: ThemeItem[] = await response.json();
-    const action: ThemeAction = { type: 'Get_Themes', payload: allThemes };
-    dispatch(action);
+  useEffect(() => {
+    async function getThemes(): Promise<any> {
+      const response = await fetch('/api/questions');
+      const allThemes: ThemeItem[] = await response.json();
+      const action: ThemeAction = { type: 'Get_Themes', payload: allThemes };
+      dispatch(action);
+    }
+    getThemes();
   }, []);
   console.log(themes);
 
