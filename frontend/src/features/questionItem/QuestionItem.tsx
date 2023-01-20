@@ -1,5 +1,12 @@
-import React from 'react';
-import { Box, Modal, Typography, TableCell, Button } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Box,
+  Modal,
+  Typography,
+  TableCell,
+  Button,
+  TextField,
+} from '@mui/material';
 import { Item } from '../main/MainGame';
 
 const style = {
@@ -7,7 +14,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 800,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -18,10 +25,35 @@ type QuestionItemProps = {
   item: Item;
 };
 
+const answer = 'something';
+//сделать score в базу данных
+
 function QuestionItem({ item }: QuestionItemProps): JSX.Element {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [isAnswerRight, setIsAnswerRight] = useState<boolean>();
+  const [userAnswer, setUserAnswer] = useState('');
+
+  //это надо заменить на score из БД
+  const [score, setScore] = useState(0);
+
   const handleOpen = (): void => setOpen(true);
   const handleClose = (): void => setOpen(false);
+
+  const sendAnswer = (): void => {
+    if (userAnswer.toLowerCase() === answer.toLowerCase()) {
+      setIsAnswerRight(true);
+      setScore((prevValue) => prevValue + item.value);
+    } else {
+      setIsAnswerRight(false);
+      setScore((prevValue) => prevValue - item.value);
+    }
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    setUserAnswer(event.target.value);
+  };
 
   return (
     <TableCell align="right" sx={{ padding: 0, margin: 0 }}>
@@ -36,18 +68,21 @@ function QuestionItem({ item }: QuestionItemProps): JSX.Element {
           },
         }}
       >
-        <Button
-          onClick={handleOpen}
-          sx={{
-            color: '#000',
-            display: 'flex',
-            width: '100%',
-            height: '100%',
-            fontSize: '30px',
-          }}
-        >
-          {item.value}
-        </Button>
+        {
+          <Button
+            onClick={handleOpen}
+            sx={{
+              color: '#000',
+              display: 'flex',
+              width: '100%',
+              height: '100%',
+              fontSize: '30px',
+            }}
+            disabled={isAnswerRight !== undefined}
+          >
+            {item.value}
+          </Button>
+        }
       </Box>
 
       <Modal
@@ -57,12 +92,34 @@ function QuestionItem({ item }: QuestionItemProps): JSX.Element {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {item.value}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2, fontSize: '24px' }}
+          >
             {item.question}
           </Typography>
+          <TextField
+            onChange={handleInputChange}
+            id="filled-basic"
+            label="Ответ"
+            variant="filled"
+            sx={{ width: '100%', margin: '20px 0' }}
+          />
+          <br />
+          <Button onClick={sendAnswer} variant="contained">
+            Ответить
+          </Button>
+          {isAnswerRight === undefined ? (
+            ''
+          ) : (
+            <div style={{ fontSize: '22px' }}>
+              {!isAnswerRight ? (
+                <p>Неверно! Правильный ответ: {answer}</p>
+              ) : (
+                <p>Верно!</p>
+              )}
+            </div>
+          )}
         </Box>
       </Modal>
     </TableCell>
