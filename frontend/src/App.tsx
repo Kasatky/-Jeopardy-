@@ -5,8 +5,15 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import MainGame from "./features/main/MainGame";
+import { useDispatch } from "react-redux";
 
 function App(): JSX.Element {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch('')
+  })
   return (
     <div>
       <Navigation />
