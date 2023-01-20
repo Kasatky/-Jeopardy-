@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Popper } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 function Navigation(): JSX.Element {
@@ -25,7 +26,7 @@ function Navigation(): JSX.Element {
       <Toolbar>
        
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Своя Игра
+        <Link to='/'>Своя Игра</Link>
         </Typography>
         <Button sx={{ color: 'white' }}
         id="basic-button"
@@ -45,9 +46,9 @@ function Navigation(): JSX.Element {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Регистрация</MenuItem>
-        <MenuItem onClick={handleClose}>Войти</MenuItem>
-        <MenuItem onClick={handleClose}>Выйти</MenuItem>
+        <MenuItem onClick={handleClose}><Link to='/auth'>Регистрация</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to='/auth'>Войти</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link to='/auth'>Выйти</Link></MenuItem>
       </Menu>
       </Toolbar>
     </AppBar>
